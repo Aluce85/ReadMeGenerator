@@ -42,11 +42,41 @@ const questions = [{
   },
 ];
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
 
-// TODO: Create a function to initialize app
-function init() {}
+function writeToFile(fileName, data) {
+    console.log(answers);
+    return `#${answers.title}
+    
+    ## Description
+    ${answers.description}
+    
+    ## Table of Contents
+* [Contributing](#contributions)
+* [Usage](#usage)
+* [Contact](#contact)
+
+## License
+${generateBadgeForLicense(answers.license)}
+
+## contributions
+${answers.contributors}
+## usage
+${answers.usage}
+## contact
+${answers.contact}
+## gitHub
+[Github](https://github.com/${answers.GitHub})
+`;
+};
+
+        
+function init() {
+    inquirer.prompt(questions).then((answers) => {
+      fs.writeFile("readme.md", readMeText(answers), function (err) {
+        if (err) console.log(err);
+      });
+    });
+  }
 
 // Function call to initialize app
 init();
